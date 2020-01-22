@@ -41,7 +41,7 @@
                 <tbody>
                 <tr v-for="emp in employees">
                     <td>{{emp.id}}</td>
-                    <td>{{emp.name}}</td>
+                    <td>{{emp.name | capitalize}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -51,12 +51,23 @@
 
 <!-- APP6 -->
 <div class="col-sm-5 border" id="app6">
-    
+    <p>{{ typingText }}</p>
+    <input type="text" v-model="typingText">
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="js/main.js">
+<div id="app7">
+    <ol>
 
-    </script>
+        <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id"
+        ></todo-item>
+    </ol>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/main.js"></script>
     <script>
         let app = new Vue({
             el: "#app",
@@ -120,12 +131,29 @@
             app6 = new Vue({
                 el:"#app6",
                 data: {
-
+                    typingText: ""
                 },
                 methods:{
 
                 }
-            })
+            });
+
+        // here`s component
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>'
+        });
+        var app7 = new Vue({
+            el: '#app7',
+            data: {
+                groceryList: [
+                    { id: 0, text: 'Vegetables' },
+                    { id: 1, text: 'Cheese' },
+                    { id: 2, text: 'Whatever else humans are supposed to eat' }
+                ]
+            }
+        })
+
     </script>
 </body>
 </html>
