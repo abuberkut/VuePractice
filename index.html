@@ -29,10 +29,10 @@
        </ul>
         <div v-if="cond"><span v-bind:title="text"> <p>{{text2}}</p></span></div>
     </div>
-
 <!-- APP5 -->
 <div id="app5">
     <button class="btn btn-success" v-on:click="myFunc">Click to show employee list </button>
+    <button class="btn btn-secondary" v-on:click="sort(employees)">Click to reverse employee list </button>
         <template v-if="clicked">
             <table>
                 <thead>
@@ -47,6 +47,11 @@
             </table>
         </template>
 
+</div>
+
+<!-- APP6 -->
+<div class="col-sm-5 border" id="app6">
+    
 </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/main.js">
@@ -106,7 +111,19 @@
                     myFunc: function () {
                         if(this.clicked == true)this.clicked = false;
                         else this.clicked = true;
+                    },
+                    sort: function (arr) {
+                        arr.reverse();
                     }
+                }
+            }),
+            app6 = new Vue({
+                el:"#app6",
+                data: {
+
+                },
+                methods:{
+
                 }
             })
     </script>
