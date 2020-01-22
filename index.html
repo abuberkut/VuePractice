@@ -6,17 +6,109 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Vue_Git practice</title>
 </head>
 <body>
-    <div id="app">
+<!-- APP1 -->
+    <div class="col-sm-5 border" id="app">
+        <p>{{text}}</p>
+    </div>
+<!-- APP2 -->
+    <div class="col-sm-5 border" id="app2"><span v-bind:title="text"><p>{{text2}}</p></span>
+    </div>
+<!-- APP3 -->
+    <div class="col-sm-5 border" id="app3">
 
+        <div v-if="cond"><span v-bind:title="text"> <p>{{text2}}</p></span></div>
+    </div>
+<!-- APP4 -->
+    <div class="col-sm-5 border" id="app4">
+       <ul>
+           <li v-for="x in myArrFromData">ID: {{x.id}}, NAME: {{x.name}}</li>
+       </ul>
+        <div v-if="cond"><span v-bind:title="text"> <p>{{text2}}</p></span></div>
     </div>
 
+<!-- APP5 -->
+<div id="app5">
+    <button class="btn btn-success" v-on:click="myFunc">Click to show employee list </button>
+        <template v-if="clicked">
+            <table>
+                <thead>
+                <tr><th>ID</th><th>NAME</th></tr>
+                </thead>
+                <tbody>
+                <tr v-for="emp in employees">
+                    <td>{{emp.id}}</td>
+                    <td>{{emp.name}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </template>
+
+</div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js">
+
+    </script>
     <script>
-        
+        let app = new Vue({
+            el: "#app",
+            data: {
+                text: 'This is my first Vue app'
+            }
+        }),
+            app2 = new Vue({
+                el:"#app2",
+                data:{
+                    text2: 'Lorem ipsum dolor sit amet.',
+                    text: 'You loaded this page on ' + new Date().toLocaleString()
+                }
+            }),
+            app3 = new Vue({
+                el:"#app3",
+                data:{
+                    text2: 'It\'s text with condition. If it`s true you`ll see the hover text',
+                    text: 'You loaded this page on ' + new Date().toLocaleString(),
+                    cond: true //false
+                }
+            }),
+            app4 = new Vue({
+                el:"#app4",
+                data:{
+                    text2: 'It\'s text with condition. If it`s true you`ll see the hover text',
+                    text: 'You loaded this page on ' + new Date().toLocaleString(),
+                    myArrFromData: [
+                        {name:"Abubakr",id:1},
+                        {name:"Abbdumalik",id:2},
+                        {name:"HojiAkbar",id:3},
+                        {name:"Shahboz",id:4},
+                        {name:"Firdavs",id:5},
+                        {name:"Izat",id:6}
+                    ],
+                    cond: false
+                }
+            }),
+            app5 = new Vue({
+                el:"#app5",
+                data:{
+                    clicked: false,
+                    employees: [
+                        {id:'1', name:'A1'},
+                        {id:'2', name:'A2'},
+                        {id:'3', name:'A3'},
+                        {id:'4', name:'A4'},
+                        {id:'5', name:'A5'},
+                    ]
+                },
+                methods: {
+                    myFunc: function () {
+                        if(this.clicked == true)this.clicked = false;
+                        else this.clicked = true;
+                    }
+                }
+            })
     </script>
 </body>
 </html>
